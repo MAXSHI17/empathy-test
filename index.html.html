@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Тест на эмпатию | Медицинский персонал (расширенный)</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #e9f0f5 0%, #d9e2ec 100%);
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 20, 30, 0.2);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a3f60, #123352);
+      padding: 1.8rem 2rem;
+      color: white;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .header p {
+      font-size: 1rem;
+      opacity: 0.85;
+    }
+
+    .badge {
+      background: #ffcd7e;
+      color: #1e3b4f;
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 0.6rem;
+    }
+
+    .content {
+      padding: 2rem;
+    }
+
+    .progress-area {
+      margin-bottom: 1.8rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #2c5a7a;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-bar-bg {
+      background-color: #e2e8f0;
+      border-radius: 40px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: #2c8f6e;
+      width: 0%;
+      height: 100%;
+      border-radius: 40px;
+      transition: width 0.25s ease;
+    }
+
+    .question-card {
+      background: #fefefe;
+      border-radius: 1.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .question-text {
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: #0b2b3b;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      border-left: 5px solid #2c8f6e;
+      padding-left: 1.2rem;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      background: #f8fafc;
+      border-radius: 60px;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid #e2edf2;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .option-item:hover {
+      background: #eef4ff;
+      border-color: #9bc0d4;
+    }
+
+    input[type="radio"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #7f9fb5;
+      border-radius: 50%;
+      margin-right: 1rem;
+      cursor: pointer;
+      background: white;
+    }
+
+    input[type="radio"]:checked {
+      border-color: #2c8f6e;
+      background-color: #2c8f6e;
+      box-shadow: inset 0 0 0 4px white;
+    }
+
+    .option-label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #1f3e51;
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      background: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: #1e6f5c;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .btn-primary:hover {
+      background: #155a4a;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #eef2f5;
+      color: #1e466e;
+      border: 1px solid #cbdde6;
+    }
+
+    .btn-secondary:hover {
+      background: #e2eaf0;
+    }
+
+    .result-box {
+      background: #f1f9fe;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .result-level {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .result-desc {
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      line-height: 1.5;
+      color: #1e3b4f;
+    }
+
+    .recommend {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+      text-align: left;
+      border-left: 4px solid #2c8f6e;
+      color: #1e466e;
+    }
+
+    .restart-btn {
+      background: #1e466e;
+      color: white;
+      margin-top: 1.2rem;
+      padding: 0.7rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+    }
+
+    .warning {
+      background: #fff2e0;
+      padding: 0.6rem 1rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      color: #b9511a;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    footer {
+      font-size: 0.75rem;
+      text-align: center;
+      color: #6c8dae;
+      padding: 1rem 2rem 1.8rem;
+      border-top: 1px solid #e2edf2;
+    }
+
+    @media (max-width: 620px) {
+      .content { padding: 1.5rem; }
+      .question-text { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🧠 Тест на эмпатию (расширенный)</h1>
+    <p>Оценка эмоционального интеллекта для работы в медицинской организации</p>
+    <div class="badge">профессиональный скрининг • 24 вопроса</div>
+  </div>
+  
+  <div class="content">
+    <div id="testSection">
+      <div class="progress-area">
+        <div class="progress-header">
+          <span>📋 Ваш прогресс</span>
+          <span id="questionCounter">Вопрос 1 из 24</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+        </div>
+      </div>
+      <div id="questionContainer"></div>
+      <div class="nav-buttons">
+        <button class="btn-secondary" id="prevBtn" disabled>← Назад</button>
+        <button class="btn-primary" id="nextBtn">Далее →</button>
+      </div>
+    </div>
+
+    <div id="resultSection" style="display: none;">
+      <div class="result-box">
+        <span style="font-size: 2.2rem;">📋</span>
+        <div class="result-level" id="resultLevelText">—</div>
+        <div class="result-desc" id="resultDescription"></div>
+        <div class="recommend" id="resultRecommendation"></div>
+        <button class="restart-btn" id="restartBtn">🔄 Пройти тест заново</button>
+      </div>
+    </div>
+    <footer>
+      <span>⚕️ Тест основан на ключевых аспектах эмпатии в медицине. Ответьте честно.</span>
+    </footer>
+  </div>
+</div>
+
+<script>
+  // ------------------------- 24 ВОПРОСА (расширенная версия) -------------------------
+  const QUESTIONS = [
+    "Я легко могу понять, что чувствует пациент, даже если он не говорит об этом прямо.",
+    "Я испытываю искреннее сострадание к пациентам, которые находятся в тяжёлом состоянии.",
+    "Мне бывает трудно смотреть на страдания больного, я остро их переживаю.",
+    "Я часто мысленно представляю себя на месте пациента, чтобы лучше ощутить его переживания.",
+    "Я замечаю невербальные сигналы (выражение лица, позу, жесты), указывающие на дискомфорт.",
+    "Даже при сильной загруженности я стараюсь выслушать пациента и понять его эмоции.",
+    "Я способен сопереживать пациентам, сохраняя при этом профессиональную эффективность.",
+    "Меня искренне затрагивают истории болезней и жизненные трудности пациентов.",
+    "Я легко могу успокоить расстроенного человека и снизить его тревожность.",
+    "Когда вижу чужую боль, я испытываю сильное желание помочь и облегчить страдания.",
+    "Мои коллеги и пациенты считают меня чутким и внимательным человеком.",
+    "Я убеждён, что эмпатия — ключевое качество для качественной медицинской помощи.",
+    "Я умею находить правильные слова, чтобы поддержать родственников тяжелобольного.",
+    "В конфликтной ситуации с пациентом я стараюсь понять его эмоциональное состояние, а не только факты.",
+    "Я не остаюсь равнодушным, когда вижу, что пациент плачет или испуган.",
+    "Я способен сохранять спокойствие, но при этом демонстрировать пациенту, что его чувства важны.",
+    "Перед сложной процедурой я стараюсь объяснить всё максимально бережно и учесть страхи человека.",
+    "Я могу заметить, когда пациент не говорит правду о своём самочувствии из-за стеснения или страха.",
+    "Я быстро распознаю признаки эмоционального истощения у коллег и стараюсь поддержать их.",
+    "Я считаю, что врач или медсестра должны уметь не только лечить, но и эмоционально поддерживать.",
+    "Я не использую чёрный юмор или пренебрежительные высказывания о пациентах даже в узком кругу.",
+    "Мне удаётся избегать эмоционального выгорания, но при этом сохранять глубокую эмпатию к пациентам.",
+    "Я готов уделить лишние 2–3 минуты, чтобы поговорить с тревожным пациентом, даже если очень занят.",
+    "Я верю, что моя эмпатия напрямую влияет на скорость выздоровления и доверие к медперсоналу."
+  ];
+
+  const TOTAL_QS = QUESTIONS.length; // 24
+
+  const OPTIONS = [
+    { label: "Никогда", value: 0 },
+    { label: "Редко", value: 1 },
+    { label: "Иногда", value: 2 },
+    { label: "Часто", value: 3 },
+    { label: "Всегда", value: 4 }
+  ];
+
+  let userAnswers = new Array(TOTAL_QS).fill(null);
+  let currentIndex = 0;
+  let testCompleted = false;
+
+  const testSection = document.getElementById('testSection');
+  const resultSection = document.getElementById('resultSection');
+  const questionContainer = document.getElementById('questionContainer');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const questionCounterSpan = document.getElementById('questionCounter');
+  const progressFill = document.getElementById('progressFill');
+
+  function updateProgressAndCounter() {
+    questionCounterSpan.innerText = `Вопрос ${currentIndex+1} из ${TOTAL_QS}`;
+    const percent = (currentIndex / TOTAL_QS) * 100;
+    progressFill.style.width = `${percent}%`;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  function renderCurrentQuestion() {
+    const qText = QUESTIONS[currentIndex];
+    const savedValue = userAnswers[currentIndex];
+    
+    let optionsHtml = '';
+    OPTIONS.forEach(opt => {
+      const isChecked = (savedValue !== null && savedValue === opt.value);
+      const checkedAttr = isChecked ? 'checked' : '';
+      optionsHtml += `
+        <div class="option-item" data-value="${opt.value}">
+          <input type="radio" name="questionOption" id="opt_${opt.value}" value="${opt.value}" ${checkedAttr}>
+          <label class="option-label" for="opt_${opt.value}">${opt.label}</label>
+        </div>
+      `;
+    });
+    
+    questionContainer.innerHTML = `
+      <div class="question-card">
+        <div class="question-text">${currentIndex+1}. ${escapeHtml(qText)}</div>
+        <div class="options-list" id="optionsList">
+          ${optionsHtml}
+        </div>
+      </div>
+    `;
+    
+    // Обработчики клика на всю строку
+    document.querySelectorAll('.option-item').forEach(item => {
+      const radio = item.querySelector('input[type="radio"]');
+      item.addEventListener('click', (e) => {
+        if (radio) {
+          radio.checked = true;
+          saveCurrentAnswer();
+        }
+      });
+      if (radio) {
+        radio.addEventListener('change', saveCurrentAnswer);
+      }
+    });
+    
+    prevBtn.disabled = (currentIndex === 0);
+    nextBtn.innerText = (currentIndex === TOTAL_QS - 1) ? '✅ Завершить тест' : 'Далее →';
+    updateProgressAndCounter();
+  }
+
+  function saveCurrentAnswer() {
+    const selected = document.querySelector('input[name="questionOption"]:checked');
+    if (selected) {
+      userAnswers[currentIndex] = parseInt(selected.value, 10);
+    }
+  }
+
+  function showToastWarning(msg) {
+    const old = document.querySelector('.dynamic-warning-toast');
+    if(old) old.remove();
+    const warn = document.createElement('div');
+    warn.className = 'warning dynamic-warning-toast';
+    warn.innerText = msg;
+    const navDiv = document.querySelector('.nav-buttons');
+    if(navDiv) navDiv.parentNode.insertBefore(warn, navDiv.nextSibling);
+    setTimeout(() => warn.remove(), 3500);
+  }
+
+  function finishTest() {
+    saveCurrentAnswer();
+    const missing = [];
+    for (let i = 0; i < TOTAL_QS; i++) {
+      if (userAnswers[i] === null) missing.push(i);
+    }
+    if (missing.length > 0) {
+      currentIndex = missing[0];
+      renderCurrentQuestion();
+      showToastWarning(`⚠️ Вы не ответили на вопрос ${currentIndex+1}. Пожалуйста, завершите тест полностью.`);
+      return;
+    }
+    
+    let totalScore = 0;
+    for (let i = 0; i < TOTAL_QS; i++) totalScore += userAnswers[i];
+    const maxScore = TOTAL_QS * 4; // 96
+    let level = '', description = '', recommendation = '';
+    
+    // Проценты: низкий <40%, средний 40-70%, высокий >70%
+    const percent = (totalScore / maxScore) * 100;
+    if (percent < 40) {
+      level = '🔻 Низкий уровень эмпатии';
+      description = 'Ваша способность к сопереживанию и пониманию чувств пациентов выражена слабо. В медицинской среде это может приводить к сложностям в установлении доверительного контакта и снижению качества ухода.';
+      recommendation = 'Рекомендуется пройти коммуникативные тренинги, практиковать активное слушание и техники эмоциональной настройки. Возможно, для вас больше подойдут технические или административные позиции с ограниченным прямым контактом с пациентами.';
+    } 
+    else if (percent >= 40 && percent <= 70) {
+      level = '📘 Средний уровень эмпатии';
+      description = 'Вы демонстрируете базовое понимание эмоций пациентов, но в стрессовых ситуациях или при высокой нагрузке можете упускать эмоциональные сигналы. В целом ваш уровень достаточен для работы в медицине, но есть пространство для роста.';
+      recommendation = 'Развивайте навыки эмпатии: участвуйте в ролевых играх, обращайте внимание на невербальные проявления пациентов, регулярно получайте обратную связь от коллег. Это повысит качество медицинской помощи.';
+    } 
+    else {
+      level = '🌟 Высокий уровень эмпатии';
+      description = 'Вы обладаете отличной способностью чувствовать и понимать пациентов, проявлять искреннее сострадание, сохраняя профессионализм. Такие качества крайне ценны в медицинской организации и способствуют высокому доверию пациентов.';
+      recommendation = 'Продолжайте развивать эмоциональный интеллект и делиться опытом с коллегами. Ваша эмпатия — ключевой ресурс для работы в паллиативной помощи, педиатрии, психосоциальной поддержке. Отлично подходит для ролей с интенсивным взаимодействием с пациентами.';
+    }
+    
+    document.getElementById('resultLevelText').innerHTML = `${level}<span style="font-size: 1rem; display:block; font-weight:normal;">Балл: ${totalScore} из ${maxScore} (${Math.round(percent)}%)</span>`;
+    document.getElementById('resultDescription').innerText = description;
+    document.getElementById('resultRecommendation').innerHTML = `<strong>💡 Рекомендация:</strong> ${recommendation}`;
+    
+    testSection.style.display = 'none';
+    resultSection.style.display = 'block';
+    testCompleted = true;
+  }
+
+  function goToNext() {
+    saveCurrentAnswer();
+    if (currentIndex === TOTAL_QS - 1) {
+      finishTest();
+      return;
+    }
+    if (currentIndex + 1 < TOTAL_QS) {
+      currentIndex++;
+      renderCurrentQuestion();
+    }
+  }
+
+  function goToPrev() {
+    if (currentIndex > 0) {
+      saveCurrentAnswer();
+      currentIndex--;
+      renderCurrentQuestion();
+    }
+  }
+
+  function restartTest() {
+    userAnswers = new Array(TOTAL_QS).fill(null);
+    currentIndex = 0;
+    testCompleted = false;
+    testSection.style.display = 'block';
+    resultSection.style.display = 'none';
+    renderCurrentQuestion();
+  }
+
+  function bindEvents() {
+    prevBtn.addEventListener('click', goToPrev);
+    nextBtn.addEventListener('click', goToNext);
+    document.getElementById('restartBtn').addEventListener('click', restartTest);
+  }
+
+  function init() {
+    bindEvents();
+    renderCurrentQuestion();
+  }
+  init();
+</script>
+</body>
+</html>
